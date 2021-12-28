@@ -122,7 +122,11 @@ public class CompareCaches {
                 idxLogger.info("idx {} new archive: {} with {} file ids", indice, archiveId, fromArch.getFileIds().length);
                 continue;
             }
-            int intoCount = intoArch.getFiles() == null ? 0 : fromArch.getFiles().length;
+            if (fromArch == null) {
+                idxLogger.info("idx {} deleted archive: {}", indice, archiveId);
+                continue;
+            }
+            int intoCount = intoArch.getFiles() == null ? 0 : intoArch.getFiles().length;
             int fromCount = fromArch.getFiles() == null ? 0 : fromArch.getFiles().length;
 
             if (intoCount != fromCount)
