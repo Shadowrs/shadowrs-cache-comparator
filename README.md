@@ -1,12 +1,20 @@
 # valkyr-cache-comparer
 
-Copy `example.app.conf` and rename it to `app.conf`
+1 Copy `example.app.conf` and rename it to `app.conf`
 
-Set the paths in app.conf making sure there are no backslashes in the paths
+2 Copy `example.my-folders` and rename it to `myconfig.conf`
 
+Set the path in app.conf which points towards myconfig.conf. This is so you can have presets of multiple comparison directories by changing only `app.conf` instead the cache paths all the time.
+
+app.conf:
 ```
 # no backslashes
+conf_file = "my-folders.conf"
+```
 
+myconfig.conf:
+```
+# no backslashes
 into_cache = "B:/og-kronos"
 
 from_cache = "B:/rev202/cache"
@@ -15,6 +23,8 @@ xteas_file = "C:/Desktop/keys199-2021-08-25.json"
 
 xteas_format = "POLAR"
 ```
+
+P.S You need to run the 'jar' task on the original valkyr editor > go into `build/libs/suite-base.jar` and copy this jar into the `/lib/` folder of this project. Or download a slightly modified version of Valkyr with an adjustment to the xtea decoder this app uses [here](https://www.dropbox.com/s/6umfekzkafhzf6x/suite-base.jar?dl=1)
 
 Run `CompareCaches`
 
