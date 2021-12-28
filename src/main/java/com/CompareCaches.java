@@ -60,7 +60,13 @@ public class CompareCaches {
 
         CacheLibrary fromCache = CacheLibrary.createUncached(Paths.get(config.getString("from_cache")).toFile().getAbsolutePath());
 
+
         progressListener.notify(0, "Initializing XTEA manager with format "+config.getString("xteas_format")+" and file "+Paths.get(config.getString("xteas_file")).toFile().getAbsolutePath());
+
+        /*
+         This is custom and not from the original Valkyr cache editor release. You can delete this section and use the original
+         valkyr xtea parsing code, or download this edition from the README
+         */
         new XTEASManager.MODERN() {
             {
                 parserType = XTEASManager.XTEAParserType.valueOf(config.getString("xteas_format"));
