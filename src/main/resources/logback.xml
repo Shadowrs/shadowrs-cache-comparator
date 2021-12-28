@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2018, Adam <Adam@sigterm.info>
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<configuration scan="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./logs/client.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>./logs/client_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <!-- when file size is larger than defined, roll to new file -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SKELETONS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SKELETONS.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SKINS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SKINS.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="CONFIG-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/CONFIG.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="INTERFACE-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/INTERFACE.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SOUND_EFFECTS_1-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SOUND_EFFECTS_1.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="MAPS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/MAPS.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="MUSIC_1-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/MUSIC_1.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="MODELS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/MODELS.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SPRITES-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SPRITES.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="TEXTURES-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/TEXTURES.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="HUFFMAN-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/HUFFMAN.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="MUSIC_2-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/MUSIC_2.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="CLIENT_SCRIPT-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/CLIENT_SCRIPT.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FONTS-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/FONTS.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SOUND_EFFECTS_2-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SOUND_EFFECTS_2.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <appender name="SOUND_EFFECTS_3-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/SOUND_EFFECTS_3.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <!-- additivity=false ensures analytics data only goes to the analytics log -->
+    <logger name="SKELETONS" level="INFO" additivity="false">
+        <appender-ref ref="SKELETONS-FILE"/>
+    </logger>
+    <logger name="SKINS" level="INFO" additivity="false">
+        <appender-ref ref="SKINS-FILE"/>
+    </logger>
+    <logger name="CONFIG" level="INFO" additivity="false">
+        <appender-ref ref="CONFIG-FILE"/>
+    </logger>
+    <logger name="INTERFACE" level="INFO" additivity="false">
+        <appender-ref ref="INTERFACE-FILE"/>
+    </logger>
+    <logger name="SOUND_EFFECTS_1" level="INFO" additivity="false">
+        <appender-ref ref="SOUND_EFFECTS_1-FILE"/>
+    </logger>
+    <logger name="MAPS" level="INFO" additivity="false">
+        <appender-ref ref="MAPS-FILE"/>
+    </logger>
+    <logger name="MUSIC_1" level="INFO" additivity="false">
+        <appender-ref ref="MUSIC_1-FILE"/>
+    </logger>
+    <logger name="MODELS" level="INFO" additivity="false">
+        <appender-ref ref="MODELS-FILE"/>
+    </logger>
+    <logger name="SPRITES" level="INFO" additivity="false">
+        <appender-ref ref="SPRITES-FILE"/>
+    </logger>
+    <logger name="TEXTURES" level="INFO" additivity="false">
+        <appender-ref ref="TEXTURES-FILE"/>
+    </logger>
+    <logger name="HUFFMAN" level="INFO" additivity="false">
+        <appender-ref ref="HUFFMAN-FILE"/>
+    </logger>
+    <logger name="MUSIC_2" level="INFO" additivity="false">
+        <appender-ref ref="MUSIC_2-FILE"/>
+    </logger>
+    <logger name="CLIENT_SCRIPT" level="INFO" additivity="false">
+        <appender-ref ref="CLIENT_SCRIPT-FILE"/>
+    </logger>
+    <logger name="FONTS" level="INFO" additivity="false">
+        <appender-ref ref="FONTS-FILE"/>
+    </logger>
+    <logger name="SOUND_EFFECTS_2" level="INFO" additivity="false">
+        <appender-ref ref="SOUND_EFFECTS_2-FILE"/>
+    </logger>
+    <logger name="SOUND_EFFECTS_3" level="INFO" additivity="false">
+        <appender-ref ref="SOUND_EFFECTS_3-FILE"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
