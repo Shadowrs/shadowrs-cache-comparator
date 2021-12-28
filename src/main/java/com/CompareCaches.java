@@ -1,5 +1,6 @@
 package com;
 
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -85,7 +86,11 @@ public class CompareCaches {
     private static void loadconfig() {
         java.io.File confFile = Paths.get("app.conf").toFile();
         log.info("Config path: {}", confFile.getAbsolutePath());
-        config = ConfigFactory.systemProperties().withFallback(ConfigFactory.parseFileAnySyntax(confFile));
+        Config preconfig = ConfigFactory.systemProperties().withFallback(ConfigFactory.parseFileAnySyntax(confFile));
+
+        java.io.File confFile2 = Paths.get(preconfig.getString("conf_file")).toFile();
+        log.info("Config preset path: {}", confFile2.getAbsolutePath());
+        config = ConfigFactory.systemProperties().withFallback(ConfigFactory.parseFileAnySyntax(confFile2));
     }
 
     private static void extracted(CacheLibrary intoCache, CacheLibrary fromCache, OSRSIndices indice) {
@@ -138,7 +143,7 @@ public class CompareCaches {
                     idxLogger.info("idx {} archive {} file {} exists but data was deleted {} vs {}", indice, archiveId, fileId, intoFile.getData(), fromFile.getData());
                 }
                 else if (changed) {
-                    idxLogger.info("idx {} archive {} file {} length changed from old {} to new {} by {} bytes", indice, archiveId, fileId, intoFile.getData().length, fromFile.getData().length, intoFile.getData().length-fromArch.getData().length);
+                    idxLogger.info("idx {} archive {} file {} length changed from old {} to new {} by {} bytes", indice, archiveId, fileId, intoFile.getData().length, fromFile.getData().length, fromFile.getData().length-intoFile.getData().length);
                 }
             }
         }
