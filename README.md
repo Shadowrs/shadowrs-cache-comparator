@@ -69,6 +69,10 @@ idx CLIENT_SCRIPT archive 2066 file 0 length changed from old 242 to new 189 by 
 
 For config here is a snippet of the ID's from [OpenRS cache editor](https://github.com/kfricilone/OpenRS)
 
+[r-s post more info on cache](http://web.archive.org/web/20150426093916/http:/www.rune-server.org/runescape-development/rs-503-client-server/informative-threads/568002-known-cache-information-index-contents-unhashed-filenames.html)
+
+This is also available in RuneLite/cache module
+
 ```
 public enum ConfigArchive {
 
