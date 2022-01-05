@@ -6,3 +6,10 @@ app.conf
 build/
 rift-vs-og-kronos.conf
 r198-to-r202.conf
+kronos-vs-184/
+og-kronos-vs-rift-compare-logs/
+rift-vs-198/
+rift-vs-r194/
+kronos-to-r184.conf
+r198-to-kronos.conf
+rift-vs-r198.conf

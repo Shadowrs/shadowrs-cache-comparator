@@ -7,12 +7,14 @@
 Set the path in app.conf which points towards myconfig.conf. This is so you can have presets of multiple comparison directories by changing only `app.conf` instead the cache paths all the time.
 
 app.conf:
+
 ```
 # no backslashes
 conf_file = "my-folders.conf"
 ```
 
 myconfig.conf:
+
 ```
 # no backslashes
 into_cache = "B:/og-kronos"
@@ -35,25 +37,34 @@ Check the /logs/ folder:
 Example of logs:
 
 ```
-892  [main] INFO  SKELETONS - archives in SKELETONS: 2395 vs 2779 
-894  [main] INFO  SKELETONS - stored 2779 archive ids 
-915  [main] INFO  SKELETONS - idx SKELETONS archive 81 has new file 461 
-915  [main] INFO  SKELETONS - idx SKELETONS archive 81 has new file 462 
-955  [main] INFO  SKELETONS - idx SKELETONS archive 198 file 276 length changed from old 220 to new 221 by 137 bytes 
-955  [main] INFO  SKELETONS - idx SKELETONS archive 198 file 279 length changed from old 239 to new 240 by 156 bytes 
-1856 [main] INFO  SKELETONS - idx SKELETONS new archive: 2406 with 20 file ids 
-9419 [main] INFO  MODELS - archives in MODELS: 59114 vs 59133 
-9424 [main] INFO  MODELS - stored 59133 archive ids 
-9440 [main] INFO  MODELS - idx MODELS archive 210 file 0 length changed from old 2310 to new 2053 by -257 bytes 
-9452 [main] INFO  MODELS - idx MODELS archive 387 file 0 length changed from old 2426 to new 2432 by 6 bytes 
-2092 [main] INFO  CONFIG - idx CONFIG archive 5 has new file 634 
-2092 [main] INFO  CONFIG - idx CONFIG archive 5 has new file 10002 
-2092 [main] INFO  CONFIG - idx CONFIG archive 5 has new file 10006 
-3381 [main] INFO  CONFIG - idx CONFIG archive 6 file 1 length changed from old 58 to new 61 by 3 bytes 
-3381 [main] INFO  CONFIG - idx CONFIG archive 6 file 6 length changed from old 51 to new 54 by 3 bytes 
-6360 [main] INFO  CONFIG - idx CONFIG archive 16 has new file 3149 
-6360 [main] INFO  CONFIG - idx CONFIG archive 19 file 379 length changed from old 1 to new 2 by 1 bytes 
-6360 [main] INFO  CONFIG - idx CONFIG archive 19 has new file 381 
+archives in CONFIG: 32 vs 32
+stored 32 archive ids
+
+idx CONFIG archive OBJECT has file change count 37445 vs 37434
+idx CONFIG archive OBJECT file 37424 length changed from old 33 to new 63 by 30 bytes
+idx CONFIG archive OBJECT has new file 50000
+idx CONFIG archive OBJECT has new file 50010
+
+idx CONFIG archive NPC has file change count 9326 vs 9299
+idx CONFIG archive NPC file 9244 length changed from old 62 to new 72 by 10 bytes
+idx CONFIG archive NPC has new file 15000
+
+idx CONFIG archive SPOTANIM has new file 5033
+idx CONFIG archive VARBIT has file change count 9488 vs 9489
+idx CONFIG archive VARCLIENT has file change count 381 vs 382
+idx CONFIG archive 28 has file change count 157 vs 159
+idx CONFIG archive AREA file 525 length changed from old 49 to new 42 by -7 bytes
+
+
+archives in MODELS: 38910 vs 59114
+stored 59114 archive ids
+idx MODELS archive 30539 file 0 length changed from old 1101 to new 1172 by 71 bytes
+idx MODELS archive 37053 file 0 length changed from old 1916 to new 1867 by -49 bytes
+idx MODELS archive 38909 file 0 length changed from old 12324 to new 1 by -12323 bytes
+idx MODELS new archive: 38910 with empty file data [0]
+
+idx CLIENT_SCRIPT new archive: 10183 with 1 file length 179
+idx CLIENT_SCRIPT archive 2066 file 0 length changed from old 242 to new 189 by -53 bytes
 ```
 
 For config here is a snippet of the ID's from [OpenRS cache editor](https://github.com/kfricilone/OpenRS)
@@ -82,3 +93,4 @@ public enum ConfigArchive {
 	VARPLAYER(16);
 }
   ```
+.
