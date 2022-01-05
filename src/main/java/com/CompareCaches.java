@@ -15,6 +15,7 @@ import store.progress.ProgressListener;
 import utility.XTEASManager;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,21 +120,25 @@ public class CompareCaches {
             Archive fromArch = fromIdx.getArchive(archiveId);
 
             if (intoArch == null) {
-                idxLogger.info("idx {} new archive: {} with {} file ids", indice, archiveId, fromArch.getFileIds().length);
+                if (fromArch.getFileIds().length == 1 && (fromArch.getFile(fromArch.getFileIds()[0]).getData() == null) || fromArch.getFile(fromArch.getFileIds()[0]).getData() != null && fromArch.getFile(fromArch.getFileIds()[0]).getData().length < 2) {
+                    idxLogger.info("idx {} new archive: {} with empty file data {}", indice, idOrName(indice, archiveId), fromArch.getFile(fromArch.getFileIds()[0]).getData());
+                } else {
+                    idxLogger.info("idx {} new archive: {} with {}", indice, idOrName(indice, archiveId), fromArch.getFileIds().length == 1 ? ("1 file length "+ fromArch.getFile(fromArch.getFileIds()[0]).getData().length) : (fromArch.getFileIds().length+" new files"));
+                }
                 continue;
             }
             if (fromArch == null) {
-                idxLogger.info("idx {} deleted archive: {}", indice, archiveId);
+                idxLogger.info("idx {} deleted archive: {}", indice, idOrName(indice, archiveId));
                 continue;
             }
             int intoCount = intoArch.getFiles() == null ? 0 : intoArch.getFiles().length;
             int fromCount = fromArch.getFiles() == null ? 0 : fromArch.getFiles().length;
 
             if (intoCount != fromCount)
-                idxLogger.info("idx {} archive {} has file change count {} vs {}", indice, archiveId, fromCount, intoCount);
+                idxLogger.info("idx {} archive {} has file change count {} vs {}", indice, idOrName(indice, archiveId), fromCount, intoCount);
 
-            //idxLogger.info("idx {} archive {} has {} files", indice, archiveId, count);
-           // idxLogger.info("idx {} archive {} has {} files", indice, archiveId, count);
+            //idxLogger.info("idx {} archive {} has {} files", indice, idOrName(indice, archiveId), count);
+           // idxLogger.info("idx {} archive {} has {} files", indice, idOrName(indice, archiveId), count);
 
             for (int fileId : fromArch.getFileIds()) {
                 File fromFile = fromArch.getFile(fileId);
@@ -144,20 +149,61 @@ public class CompareCaches {
                 boolean missingData = bothActive && !bothMissingData && (intoFile.getData()==null || fromFile.getData()==null);
                 boolean changed = intoFile != null && fromFile.getData() != null && intoFile.getData() != null && fromFile.getData().length != intoFile.getData().length;
                 if (intoFile == null) {
-                    idxLogger.info("idx {} archive {} has new file {}", indice, archiveId, fileId);
+                    idxLogger.info("idx {} archive {} has new file {}", indice, idOrName(indice, archiveId), fileId);
                 }
                 else if (removed) {
-                    idxLogger.info("idx {} archive {} file {} was deleted", indice, archiveId, fileId);
+                    idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
                 }
                 else if (missingData) {
-                    idxLogger.info("idx {} archive {} file {} exists but data was deleted {} vs {}", indice, archiveId, fileId, intoFile.getData(), fromFile.getData());
+                    if (intoFile.getData() == null && fromFile.getData() != null && fromFile.getData().length < 2) {
+                        idxLogger.info("empty map file added archive {}.{}.{}", idOrName(indice, archiveId), indice, fileId);
+                    } else {
+                        idxLogger.info("idx {} archive {} file {} exists but data was deleted {} vs {}", indice, idOrName(indice, archiveId), fileId, intoFile.getData(), fromFile.getData());
+                    }
                 }
                 else if (changed) {
-                    idxLogger.info("idx {} archive {} file {} length changed from old {} to new {} by {} bytes", indice, archiveId, fileId, intoFile.getData().length, fromFile.getData().length, fromFile.getData().length-intoFile.getData().length);
+                    idxLogger.info("idx {} archive {} file {} length changed from old {} to new {} by {} bytes", indice, idOrName(indice, archiveId), fileId, intoFile.getData().length, fromFile.getData().length, fromFile.getData().length-intoFile.getData().length);
                 }
             }
         }
 
+    }
+
+    private static String idOrName(OSRSIndices indice, Integer archiveId) {
+        ConfigArchive configArchive = Arrays.stream(ConfigArchive.values()).filter(e -> e.i == archiveId).findFirst().orElse(null);
+        if (indice == OSRSIndices.CONFIG && configArchive != null)
+            return configArchive.name();
+        return ""+archiveId;
+    }
+
+    public enum ConfigArchive {
+
+        AREA(35),
+        ENUM(8),
+        HITBAR(33),
+        HITMARK(32),
+        IDENTKIT(3),
+        ITEM(10),
+        INV(5),
+        NPC(9),
+        OBJECT(6),
+        OVERLAY(4),
+        PARAMS(11),
+        SEQUENCE(12),
+        SPOTANIM(13),
+        STRUCT(34),
+        UNDERLAY(1),
+        VARBIT(14),
+        VARCLIENT(19),
+        VARCLIENTSTRING(15),
+        VARPLAYER(16);
+
+        public final int i;
+
+        ConfigArchive(int i) {
+
+            this.i = i;
+        }
     }
 
 }

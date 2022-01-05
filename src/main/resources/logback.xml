@@ -47,7 +47,7 @@
         </rollingPolicy>
 
         <encoder>
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+            <Pattern>%msg%n</Pattern>
         </encoder>
     </appender>
 
@@ -55,112 +55,112 @@
         <file>./logs/SKELETONS.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="SKINS-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/SKINS.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="CONFIG-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/CONFIG.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="INTERFACE-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/INTERFACE.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="SOUND_EFFECTS_1-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/SOUND_EFFECTS_1.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="MAPS-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/MAPS.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="MUSIC_1-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/MUSIC_1.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="MODELS-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/MODELS.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="SPRITES-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/SPRITES.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="TEXTURES-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/TEXTURES.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="HUFFMAN-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/HUFFMAN.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="MUSIC_2-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/MUSIC_2.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="CLIENT_SCRIPT-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/CLIENT_SCRIPT.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="FONTS-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/FONTS.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="SOUND_EFFECTS_2-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/SOUND_EFFECTS_2.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <appender name="SOUND_EFFECTS_3-FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/SOUND_EFFECTS_3.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
     <!-- additivity=false ensures analytics data only goes to the analytics log -->
