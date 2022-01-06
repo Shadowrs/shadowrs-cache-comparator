@@ -115,6 +115,7 @@ public class CompareCaches {
         }
         idxLogger.info("stored {} archive ids", archivesIds.size());
         Set<Integer> deletedArchivesIds = new HashSet<>();
+        Set<Integer> cumulativeDeletedFileIds = new HashSet<>(); // when theres only 1 file per achive, like maps/models
 
         for (Integer archiveId : archivesIds) {
             Archive intoArch = intoIdx.getArchive(archiveId);
@@ -155,8 +156,12 @@ public class CompareCaches {
                     idxLogger.info("idx {} archive {} has new file {}", indice, idOrName(indice, archiveId), fileId);
                 }
                 else if (removed) {
-                    deletedFileIds.add(fileId);
-                    //idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
+                    if (indice == OSRSIndices.MODELS || indice == OSRSIndices.MAPS) {
+                        cumulativeDeletedFileIds.add(fileId);
+                    } else {
+                        deletedFileIds.add(fileId);
+                        //idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
+                    }
                 }
                 else if (missingData) {
                     if (intoFile.getData() == null && fromFile.getData() != null && fromFile.getData().length < 2) {
@@ -172,6 +177,8 @@ public class CompareCaches {
             if (deletedFileIds.size() > 0)
                 idxLogger.info("Deleted "+deletedFileIds.size()+" files from idx {} archive {} with ids: {}", indice, idOrName(indice, archiveId), Arrays.toString(deletedFileIds.toArray()));
         }
+        if (cumulativeDeletedFileIds.size() > 0)
+            idxLogger.info("Deleted "+cumulativeDeletedFileIds.size()+" files from each archive in idx {} with ids: {}", indice, Arrays.toString(cumulativeDeletedFileIds.toArray()));
         if (deletedArchivesIds.size() > 0)
             idxLogger.info("Deleted "+deletedArchivesIds.size()+" archives from idx {} with ids: {}", indice, Arrays.toString(deletedArchivesIds.toArray()));
     }
