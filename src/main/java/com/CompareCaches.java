@@ -114,6 +114,7 @@ public class CompareCaches {
             archivesIds.add(archiveId);
         }
         idxLogger.info("stored {} archive ids", archivesIds.size());
+        Set<Integer> deletedArchivesIds = new HashSet<>();
 
         for (Integer archiveId : archivesIds) {
             Archive intoArch = intoIdx.getArchive(archiveId);
@@ -128,7 +129,8 @@ public class CompareCaches {
                 continue;
             }
             if (fromArch == null) {
-                idxLogger.info("idx {} deleted archive: {}", indice, idOrName(indice, archiveId));
+               // idxLogger.info("idx {} deleted archive: {}", indice, idOrName(indice, archiveId));
+                deletedArchivesIds.add(archiveId);
                 continue;
             }
             int intoCount = intoArch.getFiles() == null ? 0 : intoArch.getFiles().length;
@@ -139,6 +141,7 @@ public class CompareCaches {
 
             //idxLogger.info("idx {} archive {} has {} files", indice, idOrName(indice, archiveId), count);
            // idxLogger.info("idx {} archive {} has {} files", indice, idOrName(indice, archiveId), count);
+            Set<Integer> deletedFileIds = new HashSet<>();
 
             for (int fileId : fromArch.getFileIds()) {
                 File fromFile = fromArch.getFile(fileId);
@@ -152,7 +155,8 @@ public class CompareCaches {
                     idxLogger.info("idx {} archive {} has new file {}", indice, idOrName(indice, archiveId), fileId);
                 }
                 else if (removed) {
-                    idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
+                    deletedFileIds.add(fileId);
+                    //idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
                 }
                 else if (missingData) {
                     if (intoFile.getData() == null && fromFile.getData() != null && fromFile.getData().length < 2) {
@@ -165,8 +169,11 @@ public class CompareCaches {
                     idxLogger.info("idx {} archive {} file {} length changed from old {} to new {} by {} bytes", indice, idOrName(indice, archiveId), fileId, intoFile.getData().length, fromFile.getData().length, fromFile.getData().length-intoFile.getData().length);
                 }
             }
+            if (deletedFileIds.size() > 0)
+                idxLogger.info("Deleted "+deletedFileIds.size()+" files from idx {} archive {} with ids: {}", indice, idOrName(indice, archiveId), Arrays.toString(deletedFileIds.toArray()));
         }
-
+        if (deletedArchivesIds.size() > 0)
+            idxLogger.info("Deleted "+deletedArchivesIds.size()+" archives from idx {} with ids: {}", indice, Arrays.toString(deletedArchivesIds.toArray()));
     }
 
     private static String idOrName(OSRSIndices indice, Integer archiveId) {

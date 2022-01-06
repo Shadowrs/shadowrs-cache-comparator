@@ -13,3 +13,12 @@ rift-vs-r194/
 kronos-to-r184.conf
 r198-to-kronos.conf
 rift-vs-r198.conf
+better-vs-ogkronos/
+rift-vs-betterkronos/
+*.log
+betterkronos-to-og.conf
+rift-to-raw184.conf
+f16-vs-rift.conf
+rift-to-betterkronos184.conf
+rift-to-betterrift184.conf
+*.conf
