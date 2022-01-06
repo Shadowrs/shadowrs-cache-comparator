@@ -115,7 +115,8 @@ public class CompareCaches {
         }
         idxLogger.info("stored {} archive ids", archivesIds.size());
         Set<Integer> deletedArchivesIds = new HashSet<>();
-        Set<Integer> cumulativeDeletedFileIds = new HashSet<>(); // when theres only 1 file per achive, like maps/models
+        Set<Integer> cumulativeDeletedFileInArchiveIds = new HashSet<>(); // when theres only 1 file per achive, like maps/models
+        Set<Integer> cumulativeAddedEmptyFileInArchiveIds = new HashSet<>(); // when theres only 1 file per achive, like maps/models
 
         for (Integer archiveId : archivesIds) {
             Archive intoArch = intoIdx.getArchive(archiveId);
@@ -123,7 +124,11 @@ public class CompareCaches {
 
             if (intoArch == null) {
                 if (fromArch.getFileIds().length == 1 && (fromArch.getFile(fromArch.getFileIds()[0]).getData() == null) || fromArch.getFile(fromArch.getFileIds()[0]).getData() != null && fromArch.getFile(fromArch.getFileIds()[0]).getData().length < 2) {
-                    idxLogger.info("idx {} new archive: {} with empty file data {}", indice, idOrName(indice, archiveId), fromArch.getFile(fromArch.getFileIds()[0]).getData());
+                    if (indice == OSRSIndices.MODELS || indice == OSRSIndices.MAPS) {
+                        cumulativeAddedEmptyFileInArchiveIds.add(archiveId);
+                    } else {
+                        idxLogger.info("idx {} new archive: {} with empty file data {}", indice, idOrName(indice, archiveId), fromArch.getFile(fromArch.getFileIds()[0]).getData());
+                    }
                 } else {
                     idxLogger.info("idx {} new archive: {} with {}", indice, idOrName(indice, archiveId), fromArch.getFileIds().length == 1 ? ("1 file length "+ fromArch.getFile(fromArch.getFileIds()[0]).getData().length) : (fromArch.getFileIds().length+" new files"));
                 }
@@ -157,7 +162,7 @@ public class CompareCaches {
                 }
                 else if (removed) {
                     if (indice == OSRSIndices.MODELS || indice == OSRSIndices.MAPS) {
-                        cumulativeDeletedFileIds.add(fileId);
+                        cumulativeDeletedFileInArchiveIds.add(archiveId);
                     } else {
                         deletedFileIds.add(fileId);
                         //idxLogger.info("idx {} archive {} file {} was deleted", indice, idOrName(indice, archiveId), fileId);
@@ -165,7 +170,11 @@ public class CompareCaches {
                 }
                 else if (missingData) {
                     if (intoFile.getData() == null && fromFile.getData() != null && fromFile.getData().length < 2) {
-                        idxLogger.info("empty map file added archive {}.{}.{}", idOrName(indice, archiveId), indice, fileId);
+                        if (indice == OSRSIndices.MODELS || indice == OSRSIndices.MAPS) {
+                            cumulativeAddedEmptyFileInArchiveIds.add(archiveId);
+                        } else {
+                            idxLogger.info("empty map file added archive {}.{}.{}", idOrName(indice, archiveId), indice, fileId);
+                        }
                     } else {
                         idxLogger.info("idx {} archive {} file {} exists but data was deleted {} vs {}", indice, idOrName(indice, archiveId), fileId, intoFile.getData(), fromFile.getData());
                     }
@@ -177,10 +186,13 @@ public class CompareCaches {
             if (deletedFileIds.size() > 0)
                 idxLogger.info("Deleted "+deletedFileIds.size()+" files from idx {} archive {} with ids: {}", indice, idOrName(indice, archiveId), Arrays.toString(deletedFileIds.toArray()));
         }
-        if (cumulativeDeletedFileIds.size() > 0)
-            idxLogger.info("Deleted "+cumulativeDeletedFileIds.size()+" files from each archive in idx {} with ids: {}", indice, Arrays.toString(cumulativeDeletedFileIds.toArray()));
+        if (cumulativeDeletedFileInArchiveIds.size() > 0)
+            idxLogger.info("Deleted "+cumulativeDeletedFileInArchiveIds.size()+" files from each archive in idx {} with archive ids: {}", indice, Arrays.toString(cumulativeDeletedFileInArchiveIds.toArray()));
         if (deletedArchivesIds.size() > 0)
             idxLogger.info("Deleted "+deletedArchivesIds.size()+" archives from idx {} with ids: {}", indice, Arrays.toString(deletedArchivesIds.toArray()));
+        if (cumulativeAddedEmptyFileInArchiveIds.size() > 0) {
+            idxLogger.info("idx {} added {} empty archives with ids {}", indice, cumulativeAddedEmptyFileInArchiveIds.size(), Arrays.toString(cumulativeAddedEmptyFileInArchiveIds.toArray()));
+        }
     }
 
     private static String idOrName(OSRSIndices indice, Integer archiveId) {
