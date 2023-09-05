@@ -91,7 +91,7 @@ public class CompareCaches {
     public static com.typesafe.config.Config config;
 
     private static void loadconfig() {
-        java.io.File confFile = Paths.get("app.conf").toFile();
+        java.io.File confFile = Paths.get("configs/app.conf").toFile();
         log.info("Config path: {}", confFile.getAbsolutePath());
         Config preconfig = ConfigFactory.systemProperties().withFallback(ConfigFactory.parseFileAnySyntax(confFile));
 

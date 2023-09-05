@@ -1,4 +1,6 @@
-# valkyr-cache-comparer
+# Shadowrs' Cache Analyser & Comparator
+
+Uses valkyr cache suite
 
 1 Copy `example.app.conf` and rename it to `app.conf`
 
